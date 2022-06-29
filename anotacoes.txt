@@ -1,0 +1,98 @@
+
+|--------------------------------------------------------------------------
+| Definições
+|--------------------------------------------------------------------------
+
+
+* Controllers são classes
+
+* Funções - nas classes se chamam métodos, nos controllers se chamam actions
+
+
+
+|--------------------------------------------------------------------------
+| Para criar um projeto novo no laravel usando console
+|--------------------------------------------------------------------------
+
+
+
+* Acessar via console a pasta que deseja que o projeto seja criado.
+
+* Digitar composer create-project --prefer-dist laravel/laravel nome_do_projeto "versão do laravel".
+    Vale lembrar que o nome do projeto será a pasta que o comando irá criar;
+
+
+
+|--------------------------------------------------------------------------
+| Para iniciar esse projeto
+|--------------------------------------------------------------------------
+
+* acessar a pasta public que foi criada
+
+* executar o comando php -S uri/url:porta
+    php -S localhost:8000
+
+
+* quando quiser rodar esse projeto php artisan serve --port=8082 ou porta desejada
+
+
+|--------------------------------------------------------------------------
+| Para criar um controller usando artisan
+|--------------------------------------------------------------------------
+
+
+php artisan make:controller NomeController
+
+Obs.: como boa prática deve-se criar o nome do controller com a primeira letra maiúscula + palavra Controller
+Ex.: php artisan make:controller TesteController
+
+
+|--------------------------------------------------------------------------
+| Trabalhando com views
+|--------------------------------------------------------------------------
+
+
+As views são os arquivos html ou php
+
+Para criar uma view é necessário criá-las na pasta resources/views
+
+os arquivos precisam ser criados da seguinte forma: nomeDoArquivo.blade.php - quando digita .blade.php você identifica para o laravel que esta é uma view
+
+no controller cria-se uma action retornando essa view:
+
+    public function actionName(){
+        return view('uri.file')
+    }
+
+    * exemplo para retornar a view index que está localizada dentro da pasta website na pasta view:
+
+    public function actionName(){
+        return view('website.index')
+    }
+
+    * note que não é necessário escrever .blade.php uma vez que o método view nativo do Laravel reconhece as views pelos nomes criadas no local correto especificado acima.
+
+
+
+|--------------------------------------------------------------------------
+| Passando parâmetros nas rotas / parâmetros obrigatórios e opcionais
+|--------------------------------------------------------------------------
+
+Para definir uma rota como uma rota que aceita parâmentro basta colocar {parâmetro} na rota indicada e definir a variável
+
+
+
+exemplo contact/parametro1/parametro2, neste caso os parâmetros serão obrigatórios, se passar somente um parâmetro retorna um erro, ou seja, ou passa-se os dois ou nenhum.
+
+para um parâmetro ser opcional basta colocar uma? no final de um parâmetro, vamos supor uma rota que tenha dois parâmetros
+
+Route::get('/contact/{name}/{message?}', function($name, $message)
+    {
+        echo "$name . $message;
+    }
+
+);
+
+o primeiro parâmetro é obrigatório e o segundo é opicional
+
+

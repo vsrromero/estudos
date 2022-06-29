@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function main(){
-        return 'Main Controller';
+        return view('website.index');
     }
 }
