@@ -41,13 +41,13 @@ input, select, textarea, button {
 }
 
 button {
-    background-color: #7ab829;
+    background-color: #373835;
     cursor: pointer;
     color: #fff;
 }
 
 button:hover {
-    background-color: #6ea22c;
+    background-color: #373835;
 }
 
 ::placeholder {
@@ -100,7 +100,7 @@ button:hover {
 }
 
 .menu a:hover {
-    color: #268fd0;
+    color: #a5b2ba;
 }
 
 .emphasis-content {
@@ -111,14 +111,14 @@ button:hover {
 
 .left {
     float:left;
-    background-color: #268fd0;
+    background-color: #a5b2ba;
     width: 60%;
     height: 100%;
 }
 
 .right {
     float:right;
-    background-color: #2a9ee2;
+    background-color: #81929a;
     width: 40%;
     height: 100%;
 }
@@ -154,7 +154,7 @@ button:hover {
 
 .page-title {
     padding: 100px 0px 60px 0px;
-    background-color: #2a9ee2;
+    background-color: #a5b2ba;
     text-align: center;
 }
 

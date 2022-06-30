@@ -4,17 +4,9 @@
 
 @section('bodyContent')
 
-<div class="top">
-
-    <div class="logo">
-        <img src="img/logo.png">
-    </div>
-
-    <div class="menu">
         {{-- nav menu --}}
         @include('website.layouts.partials.navbarCommon')
-    </div>
-</div>
+
 
 <div class="emphasis-content">
 
@@ -23,17 +15,17 @@
             <h1>Power management</h1>
             <p>The ideal software for your business management.<p>
             <div class="call">
-                <img src="/img/check.png">
+                <img src="/assets/img/check.png">
                 <span class="white-text">Easy and complete management.</span>
             </div>
             <div class="call">
-                <img src="img/check.png">
+                <img src="/assets/img/check.png">
                 <span class="white-text">Your business everywhere - Go cloud</span>
             </div>
         </div>
 
         <div class="video">
-            <img src="img/player_video.jpg">
+            <img src="/assets/img/player_video.jpg">
         </div>
     </div>
 

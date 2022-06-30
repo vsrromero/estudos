@@ -4,17 +4,9 @@
 
 @section('bodyContent')
 
-<div class="top">
-
-    <div class="logo">
-        <img src="img/logo.png">
-    </div>
-
-    <div class="menu">
         {{-- nav menu --}}
         @include('website.layouts.partials.navbarCommon')
-    </div>
-</div>
+
 
 <div class="page-content">
     <div class="page-title">
@@ -48,9 +40,9 @@
 <div class="mfooter">
     <div class="social-network">
         <h2>Social Network</h2>
-        <img src="img/facebook.png">
-        <img src="img/linkedin.png">
-        <img src="img/youtube.png">
+        <img src="assets/img/facebook.png">
+        <img src="assets/img/linkedin.png">
+        <img src="assets/img/youtube.png">
     </div>
     <div class="area-contact">
         <h2>Contact</h2>
@@ -60,7 +52,7 @@
     </div>
     <div class="location">
         <h2>Find us</h2>
-        <img src="img/mapa.png">
+        <img src="assets/img/mapa.png">
     </div>
 </div>
 
