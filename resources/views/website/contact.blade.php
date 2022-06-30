@@ -29,7 +29,7 @@
                     <option value="">Complaint</option>
                 </select>
                 <br>
-                <textarea class="black-border">Type here your message</textarea>
+                <textarea class="black-border" placeholder="Type your text here"></textarea>
                 <br>
                 <button type="submit" class="black-border">SEND</button>
             </form>
