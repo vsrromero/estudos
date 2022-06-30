@@ -3,6 +3,11 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\TesteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,16 +27,26 @@ use Illuminate\Support\Facades\Route;
 //função Route::get*('/endereço', [NomeDoArquivoController::class, 'Action / nomeDaFunçãoNoController']);
 //*get, post, put, patch, delete, options
 
-Route::get('/', [MainController::class, 'main']);
+//common area
+Route::get('/', [MainController::class, 'main'])->name('common.index');
+Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs');
+Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
+Route::get('/login', [LoginController::class, 'login'])->name('common.login');
 
-Route::get('/aboutUs', [AboutUsController::class, 'aboutUs']);
+//agrupando rotas em um prefixo
+Route::prefix('/app')->group(function(){
 
-Route::get('/contact', [ContactController::class, 'contact']);
+    Route::get('/clients', [ClientsController::class, 'clients'])->name('app.clients');
+    Route::get('/suppliers', [SuppliersController::class, 'suppliers'])->name('app.suppliers');
+    Route::get('/products', [ProductsController::class, 'products'])->name('app.products');
 
-//name como parâmetro
-//contact/Nome
-Route::get('/contact/{name}', function(string $name) {
-    echo "<h1>Hello $name</h1>";
 });
+
+
+//Route general test
+
+Route::get('/teste/{p1?}/{p2?}', [TesteController::class , 'teste'])->name('teste');
+
+
 
 

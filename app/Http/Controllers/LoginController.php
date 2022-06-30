@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class LoginController extends Controller
 {
-    public function main(){
+    public function login(){
         //return view and send 'title' as variable to parameter $title
-        return view('website.index' , ['title' => 'Wellcome']);
+        return view('website.login' , ['title' => 'Wellcome']);
     }
 }

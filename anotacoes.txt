@@ -30,6 +30,7 @@
 * acessar a pasta public que foi criada
 
 * executar o comando php -S uri/url:porta
+
     php -S localhost:8000
 
 
@@ -61,7 +62,7 @@ os arquivos precisam ser criados da seguinte forma: nomeDoArquivo.blade.php - qu
 no controller cria-se uma action retornando essa view:
 
     public function actionName(){
-        return view('uri.file')
+        return view('path.file')
     }
 
     * exemplo para retornar a view index que está localizada dentro da pasta website na pasta view:
@@ -69,6 +70,7 @@ no controller cria-se uma action retornando essa view:
     public function actionName(){
         return view('website.index')
     }
+
 
     * note que não é necessário escrever .blade.php uma vez que o método view nativo do Laravel reconhece as views pelos nomes criadas no local correto especificado acima.
 
@@ -87,12 +89,130 @@ exemplo contact/parametro1/parametro2, neste caso os parâmetros serão obrigat�
 para um parâmetro ser opcional basta colocar uma? no final de um parâmetro, vamos supor uma rota que tenha dois parâmetros
 
 Route::get('/contact/{name}/{message?}', function($name, $message)
-    {
-        echo "$name . $message;
-    }
+{
+    echo "$name . $message";
+}
 
 );
 
 o primeiro parâmetro é obrigatório e o segundo é opicional
+
+
+|--------------------------------------------------------------------------
+| Agrupando rotas
+|--------------------------------------------------------------------------
+
+
+Para agrupar rotas é necessário escolher um prefixo ao qual elas ficarão agrupadas
+
+Cria-se então uma rota usando no lugar do verbo http o método prefix;
+Route::prefix
+
+Então escolhe-se a string que será o prefixo e depois chamando o método 'group', passa-se uma function() com as rotas dentro.
+
+Ex.:
+
+
+Route::prefix('/app')->group(function(){
+
+    Route::get('/clients', [ClientsController::class, 'clients']);
+    Route::get('/suppliers', [SuppliersController::class, 'suppliers']);
+    Route::get('/products', [ProductsController::class, 'products']);
+
+});
+
+
+|--------------------------------------------------------------------------
+| Nomeando uma rota
+|--------------------------------------------------------------------------
+
+basta usar o método 'name' após a rota e atribuir um nome.
+
+Ex.: Route::get('/contact', [ContactController::class, 'contact'])->name('web.contact');
+
+A vantagem é que agora podemos alterar qualquer informação da rota sem ter que ficar trocando referências, uma vez que métodos e outras referências serão feitas através do nome da rota.
+
+Por exemplo, nos links agora não se passa mais a referência da rota como por exemplo /contact e sim o nome da rota dentro da função route('nome.da.rota').
+
+Ex.: <a href="{{route('web.contact')}}">
+
+Caso mudemos a rota de /contact para /talktous não será necessário alterar todos os links, uma vez que agora eles se referenciam através do nome da rota, que é web.contact
+
+Note que é necessário usar {{  }} para usar função laravel dentro do html;
+
+
+|--------------------------------------------------------------------------
+| Usando layouts
+|--------------------------------------------------------------------------
+
+@extends
+
+É usado quando a necessidade é captar o recuso de um layout para a view
+
+O comando extends recebe o path/caminh de onde o layout está.
+
+No caso deste projeto todo o esqueleto html (html-head-body) está em um layout chamado htmlBody.blade.php, desta forma precisamos que as págians extendam as informações até este escopo, então usando a função @extends('path') indicamos que estamos extendendo nosso conteúdo até esse layout.
+
+Precisa-se então criar uma sessão do conteúdo que será enviado para o layout desejado, para fazer isso usa-se a função @section('nome.da.sessão') e @endsection
+
+Supondo então que temos o seguinte conteúdo para ser passado para o layout do esqueleto html
+
+<div>
+    <h1>Conteúdo da página</h1>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</div>
+
+com as tags @section informamos qual sessão deve ser enviada ao layout e no layout usamos a função @yield('nomeDaSection') para receber essa sessão
+
+@section('conteudoDoBody')
+
+<div>
+    <h1>Conteúdo da página</h1>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</div>
+
+@endsection
+
+e no layout usa-se a função @yield dentro das tags <body></body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    @yield('conteudoDoBody')
+</body>
+</html>
+
+
+**Para passar um valor dinâmico para um @yield basta criar uma section informando para quase section vai com o valor apropriado
+
+No exemplo acima todas as págians estão recebendo como título o valor Document, para resolver isso basta em cada página que for criando criar a section com o parâmetro
+
+No arquivo de layout aplica-se então o @yield
+
+No layout:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@yield('title')</title>
+
+Na página
+
+@section('title' , 'Título da página')
 
 
