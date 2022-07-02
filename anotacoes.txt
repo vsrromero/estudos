@@ -216,3 +216,36 @@ Na página
 @section('title' , 'Título da página')
 
 
+**Para incluir um block feito em outro arquivo, por exemplo um menu que aparece em várias páginas, em um arquivo, basta usar @include('path.arquivo')
+
+Ex.:
+
+Temos o seguinte menu salvo em um arquivo chamado navbar.blade.php: //LEMBRANDO: os arquivos blades precisam todos estarem salvos como nome.blade.php
+
+<nav>
+<ul>
+    <li><a href="{{ route('common.index') }}">Main</a></li>
+    <li><a href="{{ route('common.aboutUs') }}">About us</a></li>
+    <li><a href="{{ route('common.contact') }}">Contact</a></li>
+    <li><a href="{{ route('common.login') }}">Sign in</a></li>
+</ul>
+</nav>
+
+Para incluir este mesmo menu em diversas páginas, basta usar o comoando include no local da página que programaria este menu
+
+@include('layouts.navbarCommon')
+
+Obs.: no laravel para definir o caminho de um arquivo usa-se "." ao invés de "/"
+
+
+|--------------------------------------------------------------------------
+| Trabalhando com método post
+|--------------------------------------------------------------------------
+
+
+Criar a rota com método post no arquivo de rotas web.php
+
+Route::post('/contact', [ContactController::class, 'contact'])->name('common.contact');
+**pode ter o mesmo name e chamar a mesma action, uma vez que o método é diferente o Laravel já interpreta isso
+
+Inserir no formulário dentro da view a instrução @csrf

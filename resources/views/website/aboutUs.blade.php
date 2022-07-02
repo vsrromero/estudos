@@ -19,23 +19,6 @@
     </div>
 </div>
 
-<div class="mfooter">
-    <div class="social-network">
-        <h2>Redes sociais</h2>
-        <img src="assets/img/facebook.png">
-        <img src="assets/img/linkedin.png">
-        <img src="assets/img/youtube.png">
-    </div>
-    <div class="area-contact">
-        <h2>Contact</h2>
-        <span>+44 0151 924 7373</span>
-        <br>
-        <span>vromero@vromero.co.uk</span>
-    </div>
-    <div class="location">
-        <h2>Find us</h2>
-        <img src="assets/img/mapa.png">
-    </div>
-</div>
+@include('website.layouts.partials.footerCommon')
 
 @endsection

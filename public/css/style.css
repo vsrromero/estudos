@@ -50,6 +50,40 @@ button:hover {
     background-color: #373835;
 }
 
+header {
+    width: 100%;
+    background-color: #f8f8f8;
+    position: absolute;
+    padding: 20px 0px 10px 0px;
+}
+
+nav {
+    float: right;
+    margin-right: 40px;
+}
+
+nav li {
+    display: inline;
+    float: left;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 14px 16px;
+    color: #333;
+}
+
+nav a:hover {
+    color: #a5b2ba;
+}
+
 ::placeholder {
     color: #333333;
     opacity: 1;
@@ -63,12 +97,6 @@ button:hover {
     color: #333333;
 }
 
-.top {
-    width: 100%;
-    background-color: #f8f8f8;
-    position: absolute;
-    padding: 20px 0px 10px 0px;
-}
 
 .logo {
     width: 50px;
@@ -76,32 +104,6 @@ button:hover {
     margin-left: 40px;
 }
 
-.menu {
-    float: right;
-    margin-right: 40px;
-}
-
-.menu li {
-    display: inline;
-    float: left;
-}
-
-.menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.menu a {
-    text-decoration: none;
-    padding: 14px 16px;
-    color: #333;
-}
-
-.menu a:hover {
-    color: #a5b2ba;
-}
 
 .emphasis-content {
     width: 100%;
@@ -128,7 +130,8 @@ button:hover {
 }
 
 .main-contact {
-    margin: 0px 60px 60px 40px;
+    margin: auto;
+    width: 40%;
 }
 
 .call {
