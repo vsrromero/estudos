@@ -249,3 +249,90 @@ Route::post('/contact', [ContactController::class, 'contact'])->name('common.con
 **pode ter o mesmo name e chamar a mesma action, uma vez que o método é diferente o Laravel já interpreta isso
 
 Inserir no formulário dentro da view a instrução @csrf
+
+
+|--------------------------------------------------------------------------
+| MODELS e MIGRATIONS
+|--------------------------------------------------------------------------
+
+Para criar um model ou migration.
+
+php artisan make:model ou make:migration
+
+caso queira criar uma migration automaticamente inserir a instrução -m ao final do comando, ex.: php artisan make:model Produto -m
+
+Models são criados com nomes no plural e migragions com nome no singular
+
+    | manipulando SGBD através das Migrations |
+
+Para incluir usa-se o método up e para excluir usa-se o método down
+
+criando:
+--------
+    usa-se o método up();
+
+    Schema::create('nome_tabela', function (Blueprint $table) {
+        $table->id();
+        $table->integer*('nome_coluna');
+    });
+
+    as colunas que serão inclusas são descritas dentro dos *métodos que são expressos pelas tipagens de dados* $table: $table->integer('estoque');
+
+    após criar todos as colunas que deseja basta executar o comando php artisan migrate
+
+incluindo novas colunas:
+------------------------
+    usa-se o método up();
+
+    Cria-se uma nova migration (não é necessário criar o model)
+
+    no método up, ao invés de usar Schema::create usa-se Schema::table
+
+    Schema::table('nome_tabela' function (Blueprint $table){
+        $table->integer*('nome_coluna');
+    });
+
+    *método expresso pele tipagem de dados*
+
+
+apagando tabelas e colunas:
+---------------------------
+    usa-se o método down()
+
+    Para apagar colunas precisa alterar a tabela, para isso não se usa o método create e sim o método drop / dropIfExists
+
+    Schemma::dropIfExists('nome_tabela'); //dropa a tabela
+    ou
+    Schemma::dropIfExists('nome_tabela' , ['nome_coluna']); //dropa a coluna da tabela
+
+
+criando relacionamento com chave estrangeira:
+---------------------------------------------
+
+A chave que o laravel cria não é int, é bigInt somente valores positivos (unsigned)
+
+Na hora que for criar a chave estrangeira na tabela então usa-se:
+
+De 1 para 1:
+
+Schema::create('nome_tabela', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('nome_coluna*');
+
+
+    //relationship constraint-foreign key
+    $table->foreign(nome_coluna_nessa_tabela_recebera_chave_estrangeira*')->references('coluna_tabela_pai_contendo_id')->on('nome_tabela_com_a_coluna');
+    $table->unique('nome_coluna'); //unique define que o relacionamento será de 1 para 1
+});
+
+Exemplo atual
+
+Schema::create('product_details', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('product_id');
+
+$table->foreign('product_id')->references('id')->on('products');
+$table->unique('product_id');
+});
+
+*// por convenção usa-se o nome da tabela que guarda a chave primária _ nome da colua Ex.: na tabela produto quero a coluna id que é aonde está a chave primária
