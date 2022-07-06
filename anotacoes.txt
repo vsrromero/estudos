@@ -336,3 +336,11 @@ $table->unique('product_id');
 });
 
 *// por convenção usa-se o nome da tabela que guarda a chave primária _ nome da colua Ex.: na tabela produto quero a coluna id que é aonde está a chave primária
+
+
+De 1 para na
+
+Schema::table('tabela_que_deseja_criar_a_coluna', function (Blueprint $table){
+    $table->unsignedBigInteger('nome_desejado_da_colua');
+    $table->foreign('coluna_que_sera_fk')->references('coluna_que_contem_a_chave')->on('nome_tabela_com_id');
+});
