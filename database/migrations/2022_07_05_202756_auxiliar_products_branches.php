@@ -33,6 +33,7 @@ class AuxiliarProductsBranches extends Migration
         //deleting columns from product once it is now a fk
         Schema::table('products', function(Blueprint $table){
             $table->dropColumn('minimum_stock');
+            $table->dropColumn('maximum_stock');
             $table->dropColumn('price');
         });
 
@@ -50,6 +51,10 @@ class AuxiliarProductsBranches extends Migration
      */
     public function down()
     {
+        //droping tables
+        Schema::drop('product_branches');
+        Schema::drop('branches');
+
         //adding back the columns droped from products table
         Schema::table('products', function(Blueprint $table){
             $table->float('price', 10 , 2)->nullable();
@@ -57,8 +62,5 @@ class AuxiliarProductsBranches extends Migration
             $table->integer('maximum_stock');
         });
 
-        //droping tables
-        Schema::dropIfExists('product_branches');
-        Schema::dropIfExists('branches');
     }
 }

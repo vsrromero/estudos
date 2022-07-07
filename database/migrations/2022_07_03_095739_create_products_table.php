@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 100);
             $table->float('price', 10 , 2)->nullable();
             $table->integer('minimum_stock');
+            $table->integer('maximum_stock');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('products');
     }
 }

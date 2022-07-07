@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterSuppliersNewColumns extends Migration
+class AlterSiteContactsColumnsOrder extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AlterSuppliersNewColumns extends Migration
      */
     public function up()
     {
-        Schema::table('suppliers', function (Blueprint $table) {
-            $table->string('uf' , 2);
-            $table->string('email' , 100);
+        Schema::table('site_contacts', function(Blueprint $table){
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+        });
+
+        Schema::table('site_contacts', function(Blueprint $table){
+            $table->timestamps();
         });
     }
 
@@ -26,9 +30,6 @@ class AlterSuppliersNewColumns extends Migration
      */
     public function down()
     {
-        Schema::table('suppliers', function (Blueprint $table){
-            $table->dropColumn('uf');
-            $table->dropColumn('email');
-        });
+        //
     }
 }
