@@ -190,3 +190,13 @@ nav a:hover {
 .social-network img {
     margin: 0px 15px 0px 15px;
 }
+
+.messageSent {
+    width: 25%;
+    height: 20%;
+    margin: auto;
+    padding: 100px 0px 60px 0px;
+    line-height: 3;
+    text-align: center;
+    color: #333333;
+}

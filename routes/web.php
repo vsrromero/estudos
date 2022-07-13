@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\ContactSentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuppliersController;
@@ -34,7 +35,10 @@ Route::get('/contact', [ContactController::class, 'contact'])->name('common.cont
 Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');
 Route::get('/login', [LoginController::class, 'login'])->name('common.login');
 
-//agrupando rotas em um prefixo
+//auxiliar routes
+Route::get('/contactsent', [ContactSentController::class, 'contactSent'])->name('website.auxiliars.contactsent');
+
+//grouped app routes
 Route::prefix('/app')->group(function(){
 
     Route::get('/clients', [ClientsController::class, 'clients'])->name('app.clients');
@@ -42,6 +46,7 @@ Route::prefix('/app')->group(function(){
     Route::get('/products', [ProductsController::class, 'products'])->name('app.products');
 
 });
+
 
 
 //Route general test

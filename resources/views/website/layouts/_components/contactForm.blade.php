@@ -6,13 +6,14 @@
     <br>
     <input name="email" type="text" placeholder="E-mail" class="black-border" value="{{ old('email')}}">
     <br>
-    <select name="contact_reason" class="black-border">
+    <select name="contact_reason_id" class="black-border">
         <option value="">Main reason of contact</option>
-
+        {{-- creating <option> for <select> with DB data --}}
         @foreach ($contact_reason as $key => $value)
-        <option value="{{$key}}"{{ old('contact_reason') == $key ? 'selected' : ''}}>{{$value}}</option>
+        <option value="{{$key}}"{{ old('contact_reason_id') == $key ? 'selected' : ''}}>{{$value}}</option>
 
         @endforeach
+
     </select>
     <br>
     <textarea name="message" class="black-border" placeholder="Type your text here">{{ old('message')}}</textarea>

@@ -23,7 +23,7 @@ class MainController extends Controller
             'name' => 'required | min:3 | max:50',
             'phone' => 'required | min:3 | max:20',
             'email' => 'required | min:3 | max:80',
-            'contact_reason' => 'required',
+            'contact_reason_id' => 'required',
             'message' => 'required',
         ]);
 
