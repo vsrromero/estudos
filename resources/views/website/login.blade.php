@@ -5,6 +5,6 @@
 @section('bodyContent')
 
         {{-- nav menu --}}
-        @include('website.layouts.partials.navbarCommon')
+        @include('website.layouts._partials.navbarCommon')
 
 @endsection

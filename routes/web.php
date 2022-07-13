@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'main'])->name('common.index');
 Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs');
 Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
-Route::post('/contact', [ContactController::class, 'contact'])->name('common.contact');
+Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');
 Route::get('/login', [LoginController::class, 'login'])->name('common.login');
 
 //agrupando rotas em um prefixo

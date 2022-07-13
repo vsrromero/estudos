@@ -5,7 +5,7 @@
 @section('bodyContent')
 
         {{-- nav menu --}}
-        @include('website.layouts.partials.navbarCommon')
+        @include('website.layouts._partials.navbarCommon')
 
 
 <div class="page-content">
@@ -15,13 +15,15 @@
 
     <div class="page-info">
         <div class="main-contact">
-            @component('website.layouts.components.contactForm')
+            @component('website.layouts._components.contactForm' , ['contact_reason' => $contact_reason])
 
             @endcomponent
         </div>
     </div>
 </div>
 
-@include('website.layouts.partials.footerCommon')
+
+
+@include('website.layouts._partials.footerCommon')
 
 @endsection

@@ -5,7 +5,7 @@
 @section('bodyContent')
 
         {{-- nav menu --}}
-        @include('website.layouts.partials.navbarCommon')
+        @include('website.layouts._partials.navbarCommon')
 
 
 <div class="emphasis-content">
@@ -33,7 +33,7 @@
         <div class="contact">
             <h1>Contact</h1>
             <p>Any doubt? Get in touch with our team.<p>
-                @component('website.layouts.components.contactForm')
+                @component('website.layouts._components.contactForm' , ['contact_reason' => $contact_reason])
 
                 @endcomponent
         </div>

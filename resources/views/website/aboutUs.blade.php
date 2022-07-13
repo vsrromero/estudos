@@ -5,7 +5,7 @@
 @section('bodyContent')
 
         {{-- nav menu --}}
-        @include('website.layouts.partials.navbarCommon')
+        @include('website.layouts._partials.navbarCommon')
 
 <div class="page-content">
     <div class="page-title">
@@ -19,6 +19,6 @@
     </div>
 </div>
 
-@include('website.layouts.partials.footerCommon')
+@include('website.layouts._partials.footerCommon')
 
 @endsection
