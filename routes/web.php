@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\TesteController;
+use App\Http\Middleware\LogAccessMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,10 @@ use Illuminate\Support\Facades\Route;
 //*get, post, put, patch, delete, options
 
 //common area
-Route::get('/', [MainController::class, 'main'])->name('common.index');
+Route::middleware(LogAccessMiddleware::class)
+->get('/', 'MainController@main')
+->name('common.index')
+;
 Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs');
 Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
 Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');

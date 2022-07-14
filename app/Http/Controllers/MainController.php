@@ -18,19 +18,20 @@ class MainController extends Controller
     }
 
     public function saveDb(Request $request){
+        //validate fields before saving
+        $validation = [
+            'name' => 'required | min:3 | max:50',
+            'phone' => 'required | min:5 | max:20',
+            'email' => 'email',
+            'contact_reason_id' => 'required',
+            'message' => 'required'
+        ];
+        //custom messages
+        $messages = [
+            'contact_reason_id.required' => 'Please select one reason'
+        ];
 
-        $request->validate(
-            [
-                'name' => 'required | min:3 | max:50',
-                'phone' => 'required | min:5 | max:20',
-                'email' => 'email',
-                'contact_reason_id' => 'required',
-                'message' => 'required',
-            ],
-            [
-                'contact_reason_id.required' => 'Please select one reason'
-            ]
-        );
+        $request->validate($validation , $messages);
 
         SiteContact::create($request->all());
 

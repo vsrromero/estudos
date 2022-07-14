@@ -84,6 +84,10 @@ nav a:hover {
     color: #a5b2ba;
 }
 
+footer {
+    width: 100%;
+}
+
 ::placeholder {
     color: #333333;
     opacity: 1;
@@ -168,10 +172,6 @@ nav a:hover {
 
 .page-info p{
     color: #333;
-}
-
-.mfooter {
-    width: 100%;
 }
 
 .social-network, .area-contact, .location {
