@@ -19,22 +19,26 @@ class ContactController extends Controller
         return view('website.contact' , ['title' => 'Contact' , 'contact_reason' => $contact_reason]);
 
     }
-
+    //save on DB
     public function saveDb(Request $request){
-
-        $request->validate([
-            'name' => 'required | min:3 | max:50',
-            'phone' => 'required | min:3 | max:20',
-            'email' => 'email',
-            'contact_reason_id' => 'required',
-            'message' => 'required',
-
-
-
-        ]);
+        //validate fields before saving
+        $request->validate(
+            [
+                'name' => 'required | min:3 | max:50',
+                'phone' => 'required | min:5 | max:20',
+                'email' => 'email',
+                'contact_reason_id' => 'required',
+                'message' => 'required',
+            ],
+            [
+                'contact_reason_id.required' => 'Please select one reason'
+            ]
+        );
 
         SiteContact::create($request->all());
         return redirect()->route('website.auxiliars.contactsent');
 
     }
+
+
 }

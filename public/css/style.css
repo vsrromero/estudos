@@ -200,3 +200,7 @@ nav a:hover {
     text-align: center;
     color: #333333;
 }
+
+.warning {
+    font-size: smaller;
+}

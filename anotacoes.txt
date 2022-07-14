@@ -505,3 +505,26 @@ php artisan make:factory SiteContactFactory --model=SiteContact
 
     ou no exemplo atual:
     php artisan db:seed --class=SiteContactSeeder
+
+
+    |--------------------------------------------------------------------------
+    | Exemplos de validação de campos feitos no Controller
+    |--------------------------------------------------------------------------
+
+    //save on DB
+    public function saveDb(Request $request){
+        //validate fields before saving
+        public function saveDb(Request $request){
+            //validate fields before saving
+            $request->validate(
+                [
+                    'name' => 'required | min:3 | max:50',
+                    'phone' => 'required | min:5 | max:20',
+                    'email' => 'email',
+                    'contact_reason_id' => 'required',
+                    'message' => 'required',
+                ],
+                [
+                    'contact_reason_id.required' => 'Please select one :attribute' //Custom message for this reason on this field
+                ]
+            );
