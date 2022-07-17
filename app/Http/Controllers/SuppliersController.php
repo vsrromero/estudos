@@ -8,6 +8,6 @@ class SuppliersController extends Controller
 {
     public function suppliers() {
         //return view and send 'title' as variable to parameter $title
-        return view('app.suppliers.index');
+        return view('app.suppliers');
     }
 }

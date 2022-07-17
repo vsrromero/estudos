@@ -30,11 +30,9 @@ use Illuminate\Support\Facades\Route;
 //*get, post, put, patch, delete, options
 
 //common area
-Route::middleware(LogAccessMiddleware::class)
-->get('/', 'MainController@main')
-->name('common.index')
-;
-Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs');
+Route::get('/', [MainController::class, 'main'])->name('common.index'); //using middleware
+
+Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs'); //using middleware
 Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
 Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');
 Route::get('/login', [LoginController::class, 'login'])->name('common.login');
@@ -43,12 +41,16 @@ Route::get('/login', [LoginController::class, 'login'])->name('common.login');
 Route::get('/contactsent', [ContactSentController::class, 'contactSent'])->name('website.auxiliars.contactsent');
 
 //grouped app routes
-Route::prefix('/app')->group(function(){
+Route::prefix('/app')->middleware('log.access' , 'authenticator: standard, visitante')->group(function(){
 
-    Route::get('/clients', [ClientsController::class, 'clients'])->name('app.clients');
-    Route::get('/suppliers', [SuppliersController::class, 'suppliers'])->name('app.suppliers');
-    Route::get('/products', [ProductsController::class, 'products'])->name('app.products');
+    Route::get('/clients', [ClientsController::class, 'clients'])
+        ->name('app.clients');
 
+    Route::get('/suppliers', [SuppliersController::class, 'suppliers'])
+        ->name('app.suppliers');
+
+    Route::get('/products', [ProductsController::class, 'products'])
+        ->name('app.products');
 });
 
 

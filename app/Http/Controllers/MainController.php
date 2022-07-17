@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\ContactReason;
 use App\SiteContact;
 use Illuminate\Http\Request;
+use App\Http\Middleware\LogAccessMiddleware;
 
 
 class MainController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware(LogAccessMiddleware::class);
+    }
     public function main(){
         //select on database as an array the contact reasons
         $contact_reason = ContactReason::pluck('reason_description' , 'id');

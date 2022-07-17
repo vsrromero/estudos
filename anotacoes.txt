@@ -507,9 +507,9 @@ php artisan make:factory SiteContactFactory --model=SiteContact
     php artisan db:seed --class=SiteContactSeeder
 
 
-    |--------------------------------------------------------------------------
-    | Exemplos de validação de campos feitos no Controller
-    |--------------------------------------------------------------------------
+|--------------------------------------------------------------------------
+| Exemplos de validação de campos feitos no Controller
+|--------------------------------------------------------------------------
 
     //save on DB
     public function saveDb(Request $request){
@@ -528,3 +528,77 @@ php artisan make:factory SiteContactFactory --model=SiteContact
                     'contact_reason_id.required' => 'Please select one :attribute' //Custom message for this reason on this field
                 ]
             );
+
+
+
+|--------------------------------------------------------------------------
+| Implementando middleware
+|--------------------------------------------------------------------------
+
+* Implementando na rota
+
+Route::get('/', [MainController::class, 'main'])->name('common.index') //middleware
+
+* Para declarar o middleware antes do verbo http tem que mudar a forma como chama a action do controller, usar 'Controller@action' ao invés de [Controller::class , 'action']
+Route::middleware(LogAccessMiddleware::class)
+->get('/', 'MainController@main')
+->name('common.index')
+
+ou atribuir depois do verbo http
+
+Route::get('/', [MainController::class, 'main'])
+->middleware(LogAccessMiddleware::class)
+->name('common.index')
+
+* Implementando no controller
+
+Cirar um método construtor
+
+Chamar o objeto middleware passando como parâmetro a classe middleware desejada.
+
+public function __construct()
+{
+    $this->middleware(LogAccessMiddleware::class);
+}
+
+* implementar para todas as rotas de um group
+No arquivo Kernel.php localizado em /App/Http/Kernel.php colocar o namespace do middleware que implementará a todas as rotas no grupo desejado.
+
+No exemplo abaixo se colocar o namespace do middleware, irá implementar o middleware a todas as rotas do grupo web
+
+protected $middlewareGroups = [
+    'web' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        // \Illuminate\Session\Middleware\AuthenticateSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ],
+
+]
+
+* criar um apelido para um middleware
+
+No arquivo Kernel.php localizado em /App/Http/Kernel.php adcionar em protected $routeMiddleware o apelido que deseja para o middleware seguido do namespace;
+
+'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+caso queira nomear o apelido com duas palavras usar o . para separalá-las: 'foo.foo2'
+
+então para implementar na rota por exemplo, usar o método middleware('apelido')
+
+Ex.:
+
+Route::get('/', [MainController::class, 'main'])->name('common.index')->middleware('apelido');
+
+Nos controllers
+
+public function __construct()
+{
+    $this->middleware('apelido');
+}
+
+
+

@@ -16,9 +16,23 @@ class LogAccessMiddleware
      */
     public function handle($request, Closure $next)
     {
-        DD($request);
-        LogAccess::create(['log' => 'IP xyz REQUESTED ROUTE abcd']);
-        return Response('Middleware');
+
+        $ip = $request->server->get('REMOTE_ADDR');
+        $route = $request->getRequestUri();
+
+
+        if($ip === '::1'){
+            $ip = "localhost";
+        }
+
+        if($route === '/'){
+            $route = '/index';
+        }
+
+
+        LogAccess::create(["log" => "IP $ip REQUESTED ROUTE $route"]);
+
+        return $next($request);
         //return $next($request);
     }
 }
