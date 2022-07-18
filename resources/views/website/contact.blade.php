@@ -7,7 +7,6 @@
         {{-- nav menu --}}
         @include('website.layouts._partials.navbarCommon')
 
-
 <div class="page-content">
     <div class="page-title">
         <h1>Get in touch</h1>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\TesteController;
 use App\Http\Middleware\LogAccessMiddleware;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,8 @@ Route::get('/', [MainController::class, 'main'])->name('common.index'); //using 
 Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs'); //using middleware
 Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
 Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');
-Route::get('/login', [LoginController::class, 'login'])->name('common.login');
+Route::get('/login', 'LoginController@index')->name('common.login');
+Route::post('/login', 'LoginController@authenticate')->name('common.login');
 
 //auxiliar routes
 Route::get('/contactsent', [ContactSentController::class, 'contactSent'])->name('website.auxiliars.contactsent');
@@ -53,7 +55,9 @@ Route::prefix('/app')->middleware('log.access' , 'authenticator: standard, visit
         ->name('app.products');
 });
 
-
+Route::fallback(function() {
+    echo 'Page not found, <a href="'.route('common.index').'">click here</a> to back to main page.';
+});
 
 //Route general test
 

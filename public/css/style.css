@@ -204,3 +204,7 @@ footer {
 .warning {
     font-size: smaller;
 }
+
+.form-login {
+    width: 20%; margin-left: auto; margin-right: auto
+}
