@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $error = $request->get('error');
         //return view and send 'title' as variable to parameter $title
-        return view('website.login' , ['title' => 'Sign in']);
+        return view('website.login' , ['title' => 'Sign in' , 'error' => $error]);
     }
 
     public function authenticate(Request $request){
@@ -29,14 +30,14 @@ class LoginController extends Controller
 
 
 
-        //Using model User
+        //Using model User to check data on DB
         $user = new User();
         $check = $user->where('email', $email)->where('password', $password)->get()->first();
 
         if(isset($check->name)) {
             echo 'Login efetuado';
         } else {
-            echo 'Usuário ou senha incorreto';
+            return redirect()->route('common.login', ['error' => 1]);
         }
 
 
