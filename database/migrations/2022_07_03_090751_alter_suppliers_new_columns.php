@@ -14,7 +14,7 @@ class AlterSuppliersNewColumns extends Migration
     public function up()
     {
         Schema::table('suppliers', function (Blueprint $table) {
-            $table->string('uf' , 2);
+            $table->string('country' , 2);
             $table->string('email' , 100);
         });
     }
@@ -27,7 +27,7 @@ class AlterSuppliersNewColumns extends Migration
     public function down()
     {
         Schema::table('suppliers', function (Blueprint $table){
-            $table->dropColumn('uf');
+            $table->dropColumn('country');
             $table->dropColumn('email');
         });
     }

@@ -13,16 +13,11 @@
         <h1>List suppliers</h1>
     </div>
 
-    <div class="menu">
-        <ul>
-            <li><a href="#">New</a></li>
-            <li><a href="#">Search</a></li>
-        </ul>
-    </div>
+    @include('app.layouts._components.suppliersMenu')
 
     <div class="page-info">
         <div class="search-form">
-            ... LIST ...
+            {{$list}}
         </div>
     </div>
 

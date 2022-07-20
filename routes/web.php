@@ -46,7 +46,13 @@ Route::get('/contactsent', [ContactSentController::class, 'contactSent'])->name(
 Route::prefix('/app')->middleware('log.access' , 'authenticator:standard,visitante')->group(function(){
     Route::get('/home', [HomeController::class, 'index'])->name('app.home');
     Route::get('/clients', [ClientsController::class, 'index'])->name('app.clients');
+    //routes for suppliers
     Route::get('/suppliers', [SuppliersController::class, 'index'])->name('app.suppliers');
+    Route::post('/suppliers/list', [SuppliersController::class, 'list'])->name('app.suppliers.list');
+    Route::get('/suppliers/add', [SuppliersController::class, 'addForm'])->name('app.suppliers.addForm');
+    Route::post('/suppliers/add', [SuppliersController::class, 'add'])->name('app.suppliers.add');
+
+    //end routes for suppliers
     Route::get('/products', [ProductsController::class, 'index'])->name('app.products');
     Route::get('/signout', [AuthenticationController::class, 'signOut'])->name('app.signout');
 });

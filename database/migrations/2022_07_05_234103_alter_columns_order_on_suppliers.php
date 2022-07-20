@@ -14,12 +14,12 @@ class AlterColumnsOrderOnSuppliers extends Migration
     public function up()
     {
         Schema::table('suppliers', function(Blueprint $table){
-            $table->dropColumn('uf');
+            $table->dropColumn('country');
             $table->dropColumn('email');
         });
 
         Schema::table('suppliers', function(Blueprint $table){
-            $table->string('uf', 2)->after('name');
+            $table->string('country', 2)->after('name');
             $table->string('email', 40)->after('uf')->nullable();
         });
     }
@@ -32,11 +32,11 @@ class AlterColumnsOrderOnSuppliers extends Migration
     public function down()
     {
         Schema::table('suppliers', function(Blueprint $table){
-            $table->dropColumn('uf');
+            $table->dropColumn('country');
             $table->dropColumn('email');
         });
         Schema::table('suppliers', function(Blueprint $table){
-            $table->string('uf', 2);
+            $table->string('country', 2);
             $table->string('email', 50);
         });
     }

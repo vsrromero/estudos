@@ -13,22 +13,21 @@
         <h1>Suppliers - Add new supplier</h1>
     </div>
 
-    <div class="menu">
-        <ul>
-            <li><a href="#">New</a></li>
-            <li><a href="#">Search</a></li>
-        </ul>
-    </div>
+@include('app.layouts._components.suppliersMenu')
 
     <div class="page-info">
         <div class="search-form">
-            <form action="" method="post">
+            <form action="{{ route('app.suppliers.add') }}" method="post">
                 @csrf
                 <input type="text" name="name" class="black-border" placeholder="Supplier Name">
+                <span class="warning">{{$errors->first('name')}}</span>
                 <input type="text" name="website" class="black-border" placeholder="website">
-                <input type="text" name="uf" class="black-border" placeholder="UF">
+                <span class="warning">{{$errors->first('website')}}</span>
+                <input type="text" name="country" class="black-border" placeholder="Country">
+                <span class="warning">{{$errors->first('country')}}</span>
                 <input type="text" name="email" class="black-border" placeholder="email">
-                <button type="submit" class="black-border">Search</button>
+                <span class="warning">{{$errors->first('email')}}</span>
+                <button type="submit" class="black-border">Add</button>
             </form>
         </div>
     </div>
