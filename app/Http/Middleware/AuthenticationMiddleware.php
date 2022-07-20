@@ -14,17 +14,13 @@ class AuthenticationMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $autMethod, $profile )
+    public function handle($request, Closure $next, string $autMethod, string $profile )
     {
-        echo "método $autMethod perfil $profile<br>";
-
-        if($autMethod == 'standard'){
-            echo "Check user and pass on DB $autMethod<br>";
-        }
-        if($autMethod == 'ldap') {
-            echo "Check user and pass on AD $autMethod<br>";
+        session_start();
+        if(isset($_SESSION['email']) && $_SESSION =! ''){
+            return $next($request);
         } else {
-            return Response('Acces denied, this route demands an authentication');
+            return redirect()->route('common.login', ['error' => 2]);
         }
     }
 }

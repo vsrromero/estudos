@@ -1,4 +1,4 @@
-@extends('website.layouts.htmlBody')
+{{-- @extends('website.layouts.htmlBody')
 
 @section('title' , $title)
 
@@ -9,4 +9,6 @@
 {{echo 'texto teste'}}
 
 
-@endsection
+@endsection --}}
+
+view teste

@@ -5,11 +5,12 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactSentController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SuppliersController;
-use App\Http\Controllers\TesteController;
 use App\Http\Middleware\LogAccessMiddleware;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 
 
 //Route::verbohttp($uri, $callback / ação ao acessar a rota)
-//função Route::get*('/endereço', [NomeDoArquivoController::class, 'Action / nomeDaFunçãoNoController']);
 //*get, post, put, patch, delete, options
 
 //common area
@@ -35,30 +35,23 @@ Route::get('/', [MainController::class, 'main'])->name('common.index'); //using 
 Route::get('/aboutUs', [AboutUsController::class, 'aboutUs'])->name('common.aboutUs'); //using middleware
 Route::get('/contact', [ContactController::class, 'contact'])->name('common.contact');
 Route::post('/contact', [ContactController::class, 'saveDb'])->name('common.contact');
-Route::get('/login', [LoginController::class, 'login'])->name('common.login');
+Route::get('/login/{error?}', 'AuthenticationController@index')->name('common.login');
+Route::post('/login', 'AuthenticationController@authenticate')->name('common.login');
 
 //auxiliar routes
 Route::get('/contactsent', [ContactSentController::class, 'contactSent'])->name('website.auxiliars.contactsent');
 
 //grouped app routes
-Route::prefix('/app')->middleware('log.access' , 'authenticator: standard, visitante')->group(function(){
-
-    Route::get('/clients', [ClientsController::class, 'clients'])
-        ->name('app.clients');
-
-    Route::get('/suppliers', [SuppliersController::class, 'suppliers'])
-        ->name('app.suppliers');
-
-    Route::get('/products', [ProductsController::class, 'products'])
-        ->name('app.products');
+//Middlewares: AuthenticationMiddleware = authenticator - LogAccessMiddleware = log.acces
+Route::prefix('/app')->middleware('log.access' , 'authenticator:standard,visitante')->group(function(){
+    Route::get('/home', [HomeController::class, 'index'])->name('app.home');
+    Route::get('/clients', [ClientsController::class, 'index'])->name('app.clients');
+    Route::get('/suppliers', [SuppliersController::class, 'index'])->name('app.suppliers');
+    Route::get('/products', [ProductsController::class, 'index'])->name('app.products');
+    Route::get('/signout', [AuthenticationController::class, 'signOut'])->name('app.signout');
 });
 
-
-
-//Route general test
-
-Route::get('/teste/{p1?}/{p2?}', [TesteController::class , 'teste'])->name('teste');
-
-
-
-
+//Return a message in case of accessing a missing page
+Route::fallback(function() {
+    echo 'Page not found, <a href="'.route('common.index').'">click here</a> to back to main page.';
+});

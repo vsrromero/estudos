@@ -84,6 +84,38 @@ nav a:hover {
     color: #a5b2ba;
 }
 
+.menu {
+    float: right;
+    margin-right: 40px;
+}
+
+.menu li {
+    display: inline;
+    float: left;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.menu a {
+    text-decoration: none;
+    padding: 14px 16px;
+    color: #333;
+}
+
+.menu a:hover {
+    color: #a5b2ba;
+}
+
+.search-form {
+    width: 30%;
+    margin: 0 auto;
+}
+
 footer {
     width: 100%;
 }
@@ -160,9 +192,16 @@ footer {
 }
 
 .page-title {
-    padding: 100px 0px 60px 0px;
+    padding: 70px 0px 10px 0px;
     background-color: #a5b2ba;
     text-align: center;
+}
+
+.page-title-app {
+    padding: 70px 0px 10px 0px;
+    background-color: #a5b2ba;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .page-info {
@@ -203,4 +242,8 @@ footer {
 
 .warning {
     font-size: smaller;
+}
+
+.form-login {
+    width: 20%; margin-left: auto; margin-right: auto
 }
