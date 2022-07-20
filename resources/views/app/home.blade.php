@@ -10,7 +10,7 @@
 
 <div class="page-content">
     <div class="page-title">
-        <h1>Products</h1>
+
     </div>
 
     </div>

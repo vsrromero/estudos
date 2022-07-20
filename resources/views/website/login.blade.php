@@ -22,6 +22,7 @@
                 <span class="warning">{{$errors->has('password') ? $errors->first('password') : '' }}</span>
                 <button type="submit" class="black-border">Sign in</button>
             </form>
+            {{ isset($error) && $error != '' ? $error : '' }}
         </div>
     </div>
 </div>

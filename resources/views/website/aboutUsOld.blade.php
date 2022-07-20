@@ -7,6 +7,6 @@
     <h1>About Us</h1>
 
     <!--navbar-->
-    @include('website.layouts.partials.navbarCommon')
+    @include('website.layouts._partials.navbarCommon')
 
 @endsection
